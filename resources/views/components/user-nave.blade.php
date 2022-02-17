@@ -4,25 +4,30 @@
             <i class="fa fa-arrow-left"></i>Back
         </a>
     </div>
-    <div class="curricullams float-right">
+<div class="curricullams float-right">
+
+
+
+
+
+
+
 
 <!-- New Sale modal -->
 <button type="button" class="btn btn-info" data-bs-toggle="modal" data-bs-target="#NewSale">
    + Add Sale
-  </button>
-   <!-- New Sale Modal -->
-   <div class="modal fade" id="NewSale" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="NewSaleLabel" aria-hidden="true">
-    <div class="modal-dialog">
-      <div class="modal-content">
-
-
-<form action="{{route('users.sales.store', ['user' => $user->id]) }}" method="post">
-    @csrf
-        <div class="modal-header">
-          <h5 class="modal-title" id="NewSaleLabel">Add Sale Satment</h5>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body">
+</button>
+<!-- New Sale Modal -->
+<div class="modal fade" id="NewSale" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="NewSaleLabel" aria-hidden="true">
+  <div class="modal-dialog">
+    <div class="modal-content">
+      <form action="{{route('users.sales.store', ['user' => $user->id]) }}" method="post">
+        @csrf
+            <div class="modal-header">
+                <h5 class="modal-title" id="NewSaleLabel">Add Sale Satment</h5>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
                 <div class="row mb-3">
                     <div class="col-md-4">Challan No:</div>
                     <div class="col-md-8">
@@ -35,18 +40,22 @@
                         <input type="date" name="date" class="form-control">
                     </div>
                 </div>
-        </div>
-        <div class="modal-footer">
-          <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
-          <button type="submit" class="btn btn-primary">Add</button>
-        </div>
-</form>
-
-
+                <div class="row mb-3">
+                    <div class="col-md-4">Note:</div>
+                    <div class="col-md-8">
+                        <input type="note" name="date" class="form-control">
+                    </div>
+                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                <button type="submit" class="btn btn-primary">Add</button>
+            </div>
+       </form>
       </div>
     </div>
-  </div>
-
+</div>
+<!-- New Sale Modal -->
 
 
 
