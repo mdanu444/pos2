@@ -1,0 +1,10 @@
+#actions {
+    display: flex !important;
+    justify-content: space-around !important;
+    align-items: center;
+    flex-direction: row;
+
+}
+*{
+    text-align: justify;
+}
