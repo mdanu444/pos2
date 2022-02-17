@@ -11,6 +11,7 @@ use App\Http\Controllers\ReceiptsController;
 use App\Http\Controllers\SalesController;
 use App\Http\Controllers\SslCommerzPaymentController;
 use App\Http\Controllers\UserController;
+use App\Http\Requests\SalesInvocieRequest;
 use App\Models\Admin;
 use App\Models\Category;
 use App\Models\Group;
@@ -52,9 +53,18 @@ Route::middleware('auth')->group(function(){
         return $pdf->download('invoice.pdf');
     })->name('users-pdf');
 
-
+//  01743499226, 01755336987
 Route::get('users/{user}/sales', [SalesController::class, 'index'])->name('users.sales');
 Route::post('users/{user}/sales', [SalesController::class, 'store'])->name('users.sales.store');
+
+
+
+
+
+
+
+
+
 
 
 Route::get('users/{user}/receipts', [ReceiptsController::class, 'index'])->name('users.receipts');

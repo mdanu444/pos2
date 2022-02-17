@@ -12,7 +12,7 @@ class User extends Model
 
     protected $fillable =
     [
-        'name', 'email', 'phone', 'address', 'group_id'
+        'name', 'email', 'phone', 'address', 'group_id', 'admin_id'
     ];
 
     public function group(){

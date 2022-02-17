@@ -22,6 +22,7 @@ class CreateAdminsTable extends Migration
             $table->rememberToken();
             $table->string('address')->nullable();
             $table->string('phone')->nullable();
+            $table->string('group_id')->nullable();
             $table->timestamps();
         });
     }

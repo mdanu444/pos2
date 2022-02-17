@@ -7,6 +7,7 @@ use App\Models\Category;
 use App\Models\Group;
 use App\Models\Product;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 
 class ProductController extends Controller
 {
@@ -34,7 +35,6 @@ class ProductController extends Controller
        $this->data ['editStatus'] = false;
        $this->data ['data'] = (object) array('id' => 0);
        $this->data['category'] = Category::arrayForSelect();
-       $this->data['admin'] = Admin::arrayForSelect();
         return view('products.create', $this->data);
     }
 
@@ -47,14 +47,14 @@ class ProductController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'admin_id'=>'required',
-            'title'=>'required|unique:products',
-            'price'=>'required',
-            'cost_price'=>'required',
-            'category_id'=>'required',
+            'title'         =>'required|unique:products',
+            'price'         =>'required',
+            'cost_price'    =>'required',
+            'category_id'   =>'required',
         ]);
-
-        if(Product::create($request->all())){
+        $data = $request->all();
+        $data['admin_id'] = Auth::id();
+        if(Product::create($data)){
             $request->session()->flash('message', 'Product Created Successfull.');
             $request->session()->flash('status', 'success');
             return redirect(route('products.index'));
@@ -108,7 +108,7 @@ class ProductController extends Controller
         $Product->cost_price = $request->cost_price;
         $Product->price = $request->price;
         $Product->category_id = $request->category_id;
-        $Product->admin_id = $request->admin_id;
+        $Product->admin_id = Auth::id();
         $Product->updated_at = now();
         if ($Product->save()) {
             $request->session()->flash('message', ' Product Updated Successfull.');

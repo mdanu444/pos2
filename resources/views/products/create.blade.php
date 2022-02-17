@@ -25,13 +25,7 @@
 
             <div class="form-group">
                 <div class="d-inline-block w-25">Category</div>
-                {!! Form::select('category_id', $category, $data->category_id, ['class'=>'form-control w-50 d-inline-block']) !!}
-            </div>
-
-
-            <div class="form-group">
-                <div class="d-inline-block w-25">Admin</div>
-                {!! Form::select('admin_id', $admin, $data->admin_id, ['class'=>'form-control w-50 d-inline-block']) !!}
+                {!! Form::select('category_id', $category, $data->id, ['class'=>'form-control w-50 d-inline-block']) !!}
             </div>
 
 
