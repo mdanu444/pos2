@@ -31,19 +31,19 @@
                 <div class="row mb-3">
                     <div class="col-md-4">Challan No:</div>
                     <div class="col-md-8">
-                        <input type="text" name="challan_no" class="form-control">
+                        <input type="text" required name="challan_no" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">Date:</div>
                     <div class="col-md-8">
-                        <input type="date" name="date" class="form-control">
+                        <input type="date" required name="date" class="form-control">
                     </div>
                 </div>
                 <div class="row mb-3">
                     <div class="col-md-4">Note:</div>
                     <div class="col-md-8">
-                        <input type="note" name="date" class="form-control">
+                        <textarea name="note" id="ntoe" rows="3" class="form-control" placeholder="Note"></textarea>
                     </div>
                 </div>
             </div>

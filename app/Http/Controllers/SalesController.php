@@ -2,9 +2,13 @@
 
 namespace App\Http\Controllers;
 
+use App\Http\Requests\SalesInvocieRequest;
+use App\Models\Product;
 use App\Models\SaleInvoice;
+use App\Models\SaleItem;
 use App\Models\User;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\URL;
 
 class SalesController extends Controller
@@ -23,30 +27,15 @@ class SalesController extends Controller
         return view('users.show',  $this->data);
     }
 
-    /**
-     * Show the form for creating a new resource.
-     *
-     * @return \Illuminate\Http\Response
-     */
-    public function create()
+    public function store(SalesInvocieRequest $request, $id)
     {
-        //
-    }
-
-    /**
-     * Store a newly created resource in storage.
-     *
-     * @param  \Illuminate\Http\Request  $request
-     * @return \Illuminate\Http\Response
-     */
-    public function store(Request $request, $id)
-    {
-        return $request;
-        $this->data['user'] = User::findOrFail($id);
-        $this->data['sales'] = SaleInvoice::all()->where('user_id', $id);
-        $FullPath = array_reverse(explode('/',URL::current()));
-        $this->data['path']= $FullPath[0];
-        return view('users.show',  $this->data);
+        $this->data = $request->all();
+        $this->data['user_id'] = $id;
+        $this->data['admin_id'] = Auth::id();
+        $this->data;
+        if($createdData = SaleInvoice::create($this->data)){
+        return redirect()->route('users.sales.invoice', ['user' => $id, 'invoice' => $createdData->id]);
+        };
     }
 
     /**
@@ -55,9 +44,23 @@ class SalesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function show($id)
+    public function invoice($user, $invoice)
     {
-        //
+        $this->data['user'] = User::find($user);
+        $this->data['invoice'] = SaleInvoice::find($invoice);
+        $this->data['items'] = SaleItem::all()->where('sale_invocie_id', '=', $invoice);
+        $this->data['products'] = Product::ArrayForSelect();
+        return view('users.SaleInvoice', $this->data);
+    }
+
+
+    public function StorItem(Request $request, $user, $invoice)
+    {
+        $this->data = $request->all();
+        $this->data['user_id'] = $user;
+        $this->data['sale_invocie_id'] = $invoice;
+        SaleItem::create($this->data);
+        return back();
     }
 
     /**
@@ -89,8 +92,22 @@ class SalesController extends Controller
      * @param  int  $id
      * @return \Illuminate\Http\Response
      */
-    public function destroy($id)
+    public function destory($user, $invoice)
     {
-        //
+        $items = SaleItem::all()->where('sale_invocie_id', $invoice);
+        $ids = [];
+        foreach($items as $key => $value){
+            $ids[$key] = $value->id;
+        }
+        SaleItem::destroy($ids);
+        SaleInvoice::destroy($invoice);
+
+        return back();
+    }
+    public function itemDestory($user, $invoice)
+    {
+        SaleItem::destroy($invoice);
+
+        return back();
     }
 }

@@ -30,12 +30,10 @@
         <td>{{$item->user->name}}</td>
         <td>{{$item->date}}</td>
         <td class="d-flex">
-            <a class="bg-success text-light rounded p-2"  href="{{ route('admins.show', ['admin' => $item->id]) }}"><i class="fa fa-eye"></i></a>
-
-            <a class="ml-2 bg-info text-light rounded p-2"  href="{{ route('admins.edit', ['admin' => $item->id]) }}"><i class="fa fa-pen"></i></a>
+            <a class="bg-success text-light rounded p-2"  href="{{ route('users.sales.invoice', ['user' => $user->id, 'invoice' => $item->id]) }}"><i class="fa fa-eye"></i></a>
 
 
-            {!! Form::open(['route' => ['admins.destroy', $item->id], 'method' => 'delete']) !!}
+            {!! Form::open(['route' => ['users.sales.delete', [$user->id, $item->id]], 'method' => 'delete']) !!}
                 <button type="submit" class="bg-danger text-light rounded p-2 ml-2 border-0"><i class="fa fa-trash"></i></button>
             {!! Form::close() !!}
         </td>

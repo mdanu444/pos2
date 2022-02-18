@@ -1,7 +1,14 @@
 <x-header />
 <div class="width-100">
 </div>
+@if ($errors->any())
+<ul class="alert alert-danger">
+    @foreach ($errors->all() as $item)
+        <li>{{ $item }}</li>
+    @endforeach
+</ul>
 
+@endif
 <x-user-nave :user="$user" />
 
 

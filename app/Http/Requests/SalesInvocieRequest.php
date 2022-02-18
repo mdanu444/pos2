@@ -13,7 +13,7 @@ class SalesInvocieRequest extends FormRequest
      */
     public function authorize()
     {
-        return false;
+        return true;
     }
 
     /**
@@ -24,7 +24,9 @@ class SalesInvocieRequest extends FormRequest
     public function rules()
     {
         return [
-            //
+            'challan_no' => 'required|integer'
+            ,'date' => 'required|date'
+            ,'date' => 'nullable'
         ];
     }
 }

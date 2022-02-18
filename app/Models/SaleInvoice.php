@@ -13,4 +13,6 @@ class SaleInvoice extends Model
     {
         return $this->belongsTo(User::class);
     }
+
+    protected $fillable = ['note', 'challan_no', 'user_id', 'admin_id', 'date'];
 }

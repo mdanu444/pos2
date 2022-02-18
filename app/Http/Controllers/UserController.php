@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Models\Group;
 use App\Models\SaleInvoice;
+use App\Models\SaleItem;
 use App\Models\User;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -133,13 +134,29 @@ class UserController extends Controller
     public function destroy($id)
     {
         if(User::destroy($id)){
-            session()->flash('message', 'User user Title Deleted Successfull.');
+            session()->flash('message', 'User Deleted Successfull.');
             session()->flash('status', 'success');
+            $Invoices = SaleInvoice::all()->where('user_id', $id);
+            $invoiceId = [];
+            foreach($Invoices as $key => $value){
+                $invoiceId[$key] = $value->id;
+            }
+            SaleInvoice::destroy($invoiceId);
+
+            $saleItemsId = [];
+            foreach($invoiceId as  $id){
+                $items = SaleItem::all()->where('sale_invocie_id', $id);
+                foreach($items as $key => $value){
+                    $saleItemsId[$key] = $value->id;
+                }
+            }
+            SaleItem::destroy($saleItemsId);
             return redirect(route('users.index'));
         }else{
-            session()->flash('message', 'User user Title cant Created Successfull.');
-            session()->flash('status', 'error');
+            session()->flash('message', 'User cant Delete.');
+            session()->flash('status', 'danger');
             return redirect(route('users.index'));
         }
+
     }
 }

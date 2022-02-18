@@ -56,6 +56,11 @@ Route::middleware('auth')->group(function(){
 //  01743499226, 01755336987
 Route::get('users/{user}/sales', [SalesController::class, 'index'])->name('users.sales');
 Route::post('users/{user}/sales', [SalesController::class, 'store'])->name('users.sales.store');
+Route::delete('users/{user}/sales/{invoice}', [SalesController::class, 'destory'])->name('users.sales.delete');
+Route::get('users/{user}/invocies/{invoice}', [SalesController::class, 'invoice'])->name('users.sales.invoice');
+Route::post('users/{user}/invocies/{invoice}/item', [SalesController::class, 'StorItem'])->name('users.sales.invoice.item');
+
+Route::delete('users/{user}/invocies/{invoice}', [SalesController::class, 'itemDestory'])->name('sale.item.destory');
 
 
 

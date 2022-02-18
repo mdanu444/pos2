@@ -26,4 +26,19 @@ class Product extends Model
         'admin_id',
         'description'
     ];
+
+    public function ArrayForSelect()
+    {
+        $array = [];
+
+        foreach(Product::all() as $item){
+            $array[$item->id] = $item->title;
+        }
+        return $array;
+    }
+
+    public function saleItem()
+    {
+        return $this->belongsTo(SaleItem::class);
+    }
 }
