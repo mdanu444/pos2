@@ -42,15 +42,28 @@ class ReceiptsController extends Controller
      * @param  \Illuminate\Http\Request  $request
      * @return \Illuminate\Http\Response
      */
-    public function store(Request $request, $id)
+    public function store(Request $request, $id, $receipt = null)
     {
-        $data = $request->input();
-        $data['user_id'] = $id;
-        $data['admin_id'] = Auth::id();
-        Receipt::create($data);
-        $request->session()->flash('message', 'Receipt Added Successfull.');
-        $request->session()->flash('status', 'success');
-        return redirect()->route('users.receipts', ['user' => $id]);
+        if($receipt == null){
+            $data = $request->input();
+            $data['user_id'] = $id;
+            $data['admin_id'] = Auth::id();
+            Receipt::create($data);
+            $request->session()->flash('message', 'Receipt Added Successfull.');
+            $request->session()->flash('status', 'success');
+            return redirect()->route('users.receipts', ['user' => $id]);
+        }
+        else{
+            $data = $request->input();
+            $data['user_id'] = $id;
+            $data['sale_invocie_id'] = $receipt;
+            $data['admin_id'] = Auth::id();
+            Receipt::create($data);
+            $request->session()->flash('message', 'Receipt Added Successfull.');
+            $request->session()->flash('status', 'success');
+            return redirect()->back();
+        }
+
     }
 
     /**

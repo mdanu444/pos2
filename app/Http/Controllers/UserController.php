@@ -3,6 +3,8 @@
 namespace App\Http\Controllers;
 
 use App\Models\Group;
+use App\Models\Payment;
+use App\Models\Receipt;
 use App\Models\SaleInvoice;
 use App\Models\SaleItem;
 use App\Models\User;
@@ -142,7 +144,8 @@ class UserController extends Controller
                 $invoiceId[$key] = $value->id;
             }
             SaleInvoice::destroy($invoiceId);
-
+            Payment::where('user_id', $id)->delete();
+            Receipt::where('user_id', $id)->delete();
             $saleItemsId = [];
             foreach($invoiceId as  $id){
                 $items = SaleItem::all()->where('sale_invocie_id', $id);

@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Http\Requests\SalesInvocieRequest;
 use App\Models\Product;
+use App\Models\Receipt;
 use App\Models\SaleInvoice;
 use App\Models\SaleItem;
 use App\Models\User;
@@ -50,6 +51,7 @@ class SalesController extends Controller
         $this->data['invoice'] = SaleInvoice::find($invoice);
         $this->data['items'] = SaleItem::all()->where('sale_invocie_id', '=', $invoice);
         $this->data['products'] = Product::ArrayForSelect();
+        $this->data['receipt'] = Receipt::all()->where('sale_invocie_id', $invoice);
         return view('users.SaleInvoice', $this->data);
     }
 

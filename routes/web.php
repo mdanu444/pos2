@@ -73,7 +73,7 @@ Route::delete('users/{user}/invocies/{invoice}', [SalesController::class, 'itemD
 
 
 Route::get('users/{user}/receipts', [ReceiptsController::class, 'index'])->name('users.receipts');
-Route::post('users/{user}/receipts', [ReceiptsController::class, 'store'])->name('users.receipts.store');
+Route::post('users/{user}/receipts/{invoice?}', [ReceiptsController::class, 'store'])->name('users.receipts.store');
 Route::delete('users/{user}/destroy/{receipt}', [ReceiptsController::class, 'destroy'])->name('users.receipts.destroy');
 
 

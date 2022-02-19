@@ -60,10 +60,16 @@
                                     </form>
                                 </td>
                             </tr>
-                        @endforeach
-                        @endif
-                    </tbody>
-                </table>
+                            @endforeach
+                            @endif
+                        </tbody>
+                    </table>
+                    <table class=" d-flex justify-content-end alert alert-success">
+                        <tr >
+                            <td ><strong>Receipt for this Invoice : </strong></td>
+                            <td >{{ $receipt->sum('amount') }}</td>
+                        </tr>
+                    </table>
 
 
 <!-- New Sale modal -->
@@ -103,6 +109,54 @@
                      <div class="col-md-4">Total:</div>
                      <div class="col-md-8">
                          {!! Form::number('total', 0, ['class' => 'form-control']) !!}
+                     </div>
+                 </div>
+             </div>
+             <div class="modal-footer">
+                 <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Close</button>
+                 <button type="submit" class="btn btn-primary">Add</button>
+             </div>
+        {!! Form::close() !!}
+       </div>
+     </div>
+ </div>
+ <!-- New Sale Modal -->
+
+
+
+ <!-- New Sale modal -->
+<button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#InvoiceReceipt">
+    + Add Receipt
+ </button>
+ <!-- New Sale Modal -->
+ <div class="modal fade" id="InvoiceReceipt" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1" aria-labelledby="InvoiceReceiptLabel" aria-hidden="true">
+   <div class="modal-dialog">
+     <div class="modal-content">
+
+        {{-- users/{user}/receipts/{invoice?} --}}
+       {!! Form::open(['route' => ['users.receipts.store', $user->id, $invoice->id], 'method' => 'post']) !!}
+         @csrf
+             <div class="modal-header">
+                 <h5 class="modal-title" id="InvoiceReceiptLabel">Add Sale Satment</h5>
+                 <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+             </div>
+             <div class="modal-body">
+                 <div class="row mb-3">
+                     <div class="col-md-4">Amount:</div>
+                     <div class="col-md-8">
+                         {!! Form::text('amount', 0, ['class' => 'form-control']) !!}
+                     </div>
+                 </div>
+                 <div class="row mb-3">
+                     <div class="col-md-4">Quantity: </div>
+                     <div class="col-md-8">
+                         {!! Form::date('date', null, ['class' => 'form-control']) !!}
+                     </div>
+                 </div>
+                 <div class="row mb-3">
+                     <div class="col-md-4">Price:</div>
+                     <div class="col-md-8">
+                         {!! Form::textarea('note', null, ['style'=>'height: 80px','class' => 'form-control']) !!}
                      </div>
                  </div>
              </div>

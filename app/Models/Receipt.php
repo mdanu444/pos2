@@ -13,5 +13,5 @@ class Receipt extends Model
     {
        return $this->belongsTo(User::class);
     }
-    protected $fillable = ['user_id', 'admin_id', 'amount', 'note','date'];
+    protected $fillable = ['user_id', 'admin_id', 'amount', 'note','date', 'sale_invocie_id'];
 }
