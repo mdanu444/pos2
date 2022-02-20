@@ -14,5 +14,9 @@ class SaleInvoice extends Model
         return $this->belongsTo(User::class);
     }
 
+    public function saleItems()
+    {
+        return $this->hasMany(SaleItem::class, 'sale_invocie_id', 'id');
+    }
     protected $fillable = ['note', 'challan_no', 'user_id', 'admin_id', 'date'];
 }

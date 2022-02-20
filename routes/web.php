@@ -44,14 +44,12 @@ Route::middleware('AuthCheck')->group(function(){
 
 Route::middleware('auth')->group(function(){
 
-    Route::resource('/users', UserController::class);
-
-
-    Route::get('users-mpdf', function () {
-        $data = User::all();
-        $pdf = PDF::loadView('users.pdfview', ['collection' => $data]);
-        return $pdf->download('invoice.pdf');
-    })->name('users-pdf');
+Route::resource('/users', UserController::class);
+Route::get('users-mpdf', function () {
+    $data = User::all();
+    $pdf = PDF::loadView('users.pdfview', ['collection' => $data]);
+    return $pdf->download('invoice.pdf');
+})->name('users-pdf');
 
 //  01743499226, 01755336987
 Route::get('users/{user}/sales', [SalesController::class, 'index'])->name('users.sales');

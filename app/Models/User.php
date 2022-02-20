@@ -23,4 +23,22 @@ class User extends Model
     {
         return $this->BelongsTo(Admin::class);
     }
+
+    public function receipt()
+    {
+        return $this->hasMany(Receipt::class);
+    }
+    public function payment()
+    {
+        return $this->hasMany(Payment::class);
+    }
+
+    public function sales()
+    {
+        return $this->hasManyThrough(SaleItem::class, SaleInvoice::class, 'user_id', 'sale_invocie_id', 'id','id');
+    }
+    public function purchases()
+    {
+        return $this->hasManyThrough(PurchaseItem::class, PurchaseInvoice::class, 'user_id', 'purchase_invocie_id', 'id','id');
+    }
 }
